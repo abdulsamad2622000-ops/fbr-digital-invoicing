@@ -12,6 +12,11 @@ class WhatsAppService
     protected $version;
     protected $baseUrl;
 
+    private function businessName(): string
+    {
+        return optional(\App\Models\BusinessSetting::first())->business_name ?: config('app.name');
+    }
+
     public function __construct()
     {
         $this->token    = config('services.whatsapp.token');
@@ -128,7 +133,7 @@ class WhatsAppService
             $phone,
             $pdfUrl,
             "Invoice-{$sale->memo_no}.pdf",
-            "Invoice #{$sale->memo_no} — Star Computer"
+            "Invoice #{$sale->memo_no} — " . $this->businessName()
         );
 
         return true;
@@ -164,7 +169,7 @@ class WhatsAppService
         $message = "Dear {$customer->name},\n\n";
         $message .= "Aapka ledger statement:\n";
         $message .= "Balance: Rs. " . number_format($customer->balance) . "\n\n";
-        $message .= "— Star Computer";
+        $message .= "— " . $this->businessName();
 
         return $this->sendText($customer->contact1, $message);
     }
@@ -179,7 +184,7 @@ class WhatsAppService
             number_format($item->total)
         )->implode("\n");
 
-        $message  = "🧾 *STAR COMPUTER*\n";
+        $message  = "🧾 *" . mb_strtoupper($this->businessName()) . "*\n";
         $message .= "━━━━━━━━━━━━━━━\n";
         $message .= "Invoice #{$sale->memo_no}\n";
         $message .= "Date: {$sale->date}\n\n";
@@ -198,7 +203,7 @@ class WhatsAppService
             $message .= "⚠️ Credit: Rs. " . number_format($sale->balance) . "\n";
         }
 
-        $message .= "\nShukriya! — Star Computer 🌟";
+        $message .= "\nShukriya! — " . $this->businessName();
 
         return $message;
     }
@@ -213,7 +218,7 @@ class WhatsAppService
             number_format($item->total)
         )->implode("\n");
 
-        $message  = "🛒 *STAR COMPUTER — Purchase Order*\n";
+        $message  = "🛒 *" . mb_strtoupper($this->businessName()) . " — Purchase Order*\n";
         $message .= "━━━━━━━━━━━━━━━\n";
         $message .= "Memo #{$purchase->memo_no}\n";
         $message .= "Date: {$purchase->date}\n\n";
@@ -226,7 +231,7 @@ class WhatsAppService
             $message .= "⚠️ Payable: Rs. " . number_format($purchase->balance) . "\n";
         }
 
-        $message .= "\n— Star Computer 🌟";
+        $message .= "\n— " . $this->businessName();
 
         return $message;
     }

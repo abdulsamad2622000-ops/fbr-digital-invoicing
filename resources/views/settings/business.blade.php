@@ -122,7 +122,7 @@
                                        name="contacts[{{ $i }}][name]"
                                        class="form-control"
                                        value="{{ $contact->name }}"
-                                       placeholder="e.g. Rehan">
+                                       placeholder="e.g. Ahmed">
                             </div>
                             <div class="col-md-5">
                                 <label class="form-label">Phone *</label>
@@ -149,7 +149,7 @@
                                 <input type="text"
                                        name="contacts[0][name]"
                                        class="form-control"
-                                       placeholder="e.g. Rehan">
+                                       placeholder="e.g. Ahmed">
                             </div>
                             <div class="col-md-5">
                                 <label class="form-label">Phone *</label>
@@ -203,7 +203,7 @@
                                        name="banks[{{ $i }}][account_title]"
                                        class="form-control"
                                        value="{{ $bank->account_title }}"
-                                       placeholder="STAR COMPUTER">
+                                       placeholder="Your Business Name">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Account Number</label>
@@ -211,7 +211,7 @@
                                        name="banks[{{ $i }}][account_number]"
                                        class="form-control"
                                        value="{{ $bank->account_number }}"
-                                       placeholder="01780104703562">
+                                       placeholder="Account number">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">IBAN</label>
@@ -219,7 +219,7 @@
                                        name="banks[{{ $i }}][iban]"
                                        class="form-control"
                                        value="{{ $bank->iban }}"
-                                       placeholder="PK28MEZN...">
+                                       placeholder="PK00XXXX...">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">
@@ -260,21 +260,21 @@
                                 <input type="text"
                                        name="banks[0][account_title]"
                                        class="form-control"
-                                       placeholder="STAR COMPUTER">
+                                       placeholder="Your Business Name">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Account Number</label>
                                 <input type="text"
                                        name="banks[0][account_number]"
                                        class="form-control"
-                                       placeholder="01780104703562">
+                                       placeholder="Account number">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">IBAN</label>
                                 <input type="text"
                                        name="banks[0][iban]"
                                        class="form-control"
-                                       placeholder="PK28MEZN...">
+                                       placeholder="PK00XXXX...">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">QR Code</label>
@@ -345,7 +345,7 @@ function addContact() {
                     <input type="text"
                            name="contacts[${contactCount}][name]"
                            class="form-control"
-                           placeholder="e.g. Rehan">
+                           placeholder="e.g. Ahmed">
                 </div>
                 <div class="col-md-5">
                     <label class="form-label">Phone *</label>
@@ -390,7 +390,7 @@ function addBank() {
                     <input type="text"
                            name="banks[${idx}][account_title]"
                            class="form-control"
-                           placeholder="STAR COMPUTER">
+                           placeholder="Your Business Name">
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Account Number</label>

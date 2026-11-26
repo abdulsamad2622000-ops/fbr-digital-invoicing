@@ -202,7 +202,7 @@
     <!-- Header -->
     <div class="header">
         <div class="brand-block">
-            <h1>{{ $s->business_name ?? 'STAR COMPUTER' }}</h1>
+            <h1>{{ $s->business_name ?? config('app.name') }}</h1>
             <div class="subtitle">
                 <strong>{{ $s->tagline ?? '' }}</strong>
             </div>
@@ -380,7 +380,7 @@
     <!-- Footer -->
     <div class="footer">
         <div>{{ $s->thank_you_message ?? 'Thank you for your business.' }}</div>
-        <div>Powered by STAR COMPUTER POS</div>
+        <div>Powered by Novastackhub</div>
     </div>
 
 </div>

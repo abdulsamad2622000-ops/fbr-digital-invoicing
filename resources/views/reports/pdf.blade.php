@@ -48,7 +48,7 @@
 </head>
 <body>
     <div class="header">
-        <h2>⭐ STAR COMPUTER</h2>
+        <h2>{{ optional(\App\Models\BusinessSetting::first())->business_name ?? config('app.name') }}</h2>
         <p>Daily Report:
             {{ \Carbon\Carbon::parse($from)->format('d M Y') }}
             —

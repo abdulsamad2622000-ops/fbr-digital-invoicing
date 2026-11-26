@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Computer — Login</title>
+    <title>{{ config('app.name') }} — Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
@@ -228,14 +228,14 @@
         <div class="hero-text">
             Hey Welcome Back <span>👋</span>
         </div>
-        <div class="hero-sub">Star Computer Accounting System</div>
+        <div class="hero-sub">Accounting &amp; FBR Digital Invoicing</div>
         <div class="hero-ring ring-1"></div>
         <div class="hero-ring ring-2"></div>
     </div>
 
     <!-- Right Panel -->
     <div class="right-panel">
-        <div class="brand-logo">⭐ Star Computer</div>
+        <div class="brand-logo">{{ config('app.name') }}</div>
         <div class="form-title">Log<span class="accent">in</span></div>
         <div class="form-subtitle">Apni ID se login karein</div>
 

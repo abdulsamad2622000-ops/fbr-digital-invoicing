@@ -11,8 +11,8 @@ class AdminSeeder extends Seeder
     {
         User::create([
             'name'     => 'Admin',
-            'email'    => 'admin@starcomputer.com',
-            'password' => bcrypt('admin123'),
+            'email'    => env('ADMIN_SEED_EMAIL', 'admin@example.com'),
+            'password' => bcrypt(env('ADMIN_SEED_PASSWORD', 'change-me-now')),
             'role'     => 'admin',
         ]);
     }

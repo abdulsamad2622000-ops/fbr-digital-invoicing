@@ -73,7 +73,7 @@
             <tr>
                 <td class="brand-col">
                     <div class="brand">
-                        <h1>{{ $s->business_name ?? 'STAR COMPUTER' }}</h1>
+                        <h1>{{ $s->business_name ?? config('app.name') }}</h1>
                         <div class="subtitle"><strong>{{ $s->tagline ?? '' }}</strong></div>
                     </div>
                     @if($s && ($s->contact1_name || $s->contact2_name || $s->contact3_name))
@@ -273,7 +273,7 @@
     <table class="footer" cellpadding="0" cellspacing="0">
         <tr>
             <td class="footer-left">{{ $s->thank_you_message ?? 'Thank you for your business.' }}</td>
-            <td class="footer-right">Powered by STAR COMPUTER POS</td>
+            <td class="footer-right">Powered by Novastackhub</td>
         </tr>
     </table>
 

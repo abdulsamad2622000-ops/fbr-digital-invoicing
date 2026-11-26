@@ -153,7 +153,7 @@ Route::post('products/{product}/restore', [ProductController::class, 'restore'])
     // WhatsApp Test
     Route::get('test-whatsapp/{phone}', function ($phone) {
         $whatsapp = new \App\Services\WhatsAppService();
-        $result = $whatsapp->sendText($phone, "Test message from Star Computer!");
+        $result = $whatsapp->sendText($phone, "Test message from " . config('app.name') . "!");
         return $result ? "WhatsApp sent!" : "Failed!";
     });
 

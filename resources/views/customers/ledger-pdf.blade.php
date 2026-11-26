@@ -130,7 +130,7 @@
 
 <!-- Header -->
 <div class="header">
-    <h2>{{ $s->business_name ?? 'STAR COMPUTER' }}</h2>
+    <h2>{{ $s->business_name ?? config('app.name') }}</h2>
     <p>Customer Ledger Statement</p>
     <p>Generated: {{ now()->format('d M Y, h:i A') }}</p>
 </div>
@@ -253,7 +253,7 @@
 <table class="footer" cellpadding="0" cellspacing="0">
     <tr>
         <td>{{ $s->thank_you_message ?? 'Thank you for your business.' }}</td>
-        <td style="text-align:right">Powered by STAR COMPUTER POS</td>
+        <td style="text-align:right">Powered by Novastackhub</td>
     </tr>
 </table>
 

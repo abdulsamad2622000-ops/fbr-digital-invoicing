@@ -21,7 +21,7 @@
 @php $s = App\Models\BusinessSetting::first(); @endphp
 
 <div class="header">
-    <h2>{{ $s->business_name ?? 'STAR COMPUTER' }}</h2>
+    <h2>{{ $s->business_name ?? config('app.name') }}</h2>
     <p>Inventory Report — Generated: {{ now()->format('d M Y, h:i A') }}</p>
 </div>
 
@@ -61,7 +61,7 @@
 
 <div class="footer">
     <span>Total Products: {{ $products->count() }}</span>
-    <span>{{ $s->thank_you_message ?? 'Star Computer POS' }}</span>
+    <span>{{ $s->thank_you_message ?? config('app.name') }}</span>
 </div>
 
 </body>

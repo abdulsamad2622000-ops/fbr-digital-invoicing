@@ -17,7 +17,7 @@
 <body>
 @php $s = App\Models\BusinessSetting::first(); @endphp
 <div class="header">
-    <h2>{{ $s->business_name ?? 'STAR COMPUTER' }}</h2>
+    <h2>{{ $s->business_name ?? config('app.name') }}</h2>
     <p>Customer List — {{ now()->format('d M Y') }}</p>
 </div>
 <table>
