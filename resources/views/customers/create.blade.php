@@ -55,6 +55,7 @@
                                class="form-control" value="{{ old('opening_balance', 0) }}"
                                min="0" step="0.01">
                     </div>
+                    @include('customers._fbr_fields', ['c' => null])
                 </div>
 
                 <div class="d-flex gap-2 mt-4">

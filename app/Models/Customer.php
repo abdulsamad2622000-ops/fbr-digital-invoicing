@@ -8,7 +8,8 @@ class Customer extends Model
 {
     protected $fillable = [
         'name', 'contact1', 'contact2',
-        'address', 'cnic', 'opening_balance', 'balance'
+        'address', 'cnic', 'opening_balance', 'balance',
+        'ntn', 'province', 'registration_type'
     ];
 
     public function sales() {

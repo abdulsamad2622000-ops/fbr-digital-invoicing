@@ -9,6 +9,10 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (DB::getDriverName() !== 'mysql') {
+            return; // ENUM change is MySQL-only.
+        }
+
         // customer_payments table
         DB::statement("ALTER TABLE customer_payments MODIFY COLUMN method ENUM('cash','online','cheque','adjustment')");
 
@@ -18,6 +22,10 @@ return new class extends Migration
 
     public function down(): void
     {
+        if (DB::getDriverName() !== 'mysql') {
+            return; // ENUM change is MySQL-only.
+        }
+
         DB::statement("ALTER TABLE customer_payments MODIFY COLUMN method ENUM('cash','online','cheque')");
         DB::statement("ALTER TABLE vendor_payments MODIFY COLUMN method ENUM('cash','online','cheque')");
     }

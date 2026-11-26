@@ -43,7 +43,17 @@ class BusinessSettingController extends Controller
             'ntn'               => $request->ntn,
             'notes'             => $request->notes,
             'thank_you_message' => $request->thank_you_message,
-        ])->save();
+            'fbr_enabled'            => $request->boolean('fbr_enabled'),
+            'fbr_environment'        => $request->input('fbr_environment') === 'production' ? 'production' : 'sandbox',
+            'seller_province'        => $request->seller_province,
+            'fbr_scenario_id'        => $request->fbr_scenario_id ? strtoupper(trim($request->fbr_scenario_id)) : null,
+            'fbr_prices_include_tax' => $request->boolean('fbr_prices_include_tax', true),
+            'fbr_auto_post'          => $request->boolean('fbr_auto_post'),
+        ]);
+        if ($request->filled('fbr_token')) {
+            $setting->fbr_token = trim($request->fbr_token);
+        }
+        $setting->save();
 
         BusinessContact::truncate();
         if ($request->contacts) {

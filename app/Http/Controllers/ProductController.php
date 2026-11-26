@@ -62,6 +62,10 @@ class ProductController extends Controller
         $request->validate([
 'name' => 'required|string|unique:products,name,' . $product->id . ',id,deleted_at,NULL',            'received_qty'  => 'nullable|integer|min:0',
             'remaining_qty' => 'nullable|integer|min:0',
+            'hs_code'       => 'nullable|string|max:20',
+            'fbr_tax_rate'  => 'nullable|numeric|min:0|max:100',
+            'fbr_uom'       => 'nullable|string|max:100',
+            'fbr_sale_type' => 'nullable|string|max:150',
         ]);
 
         if ($request->stock_code) {
@@ -84,6 +88,10 @@ class ProductController extends Controller
             'alert_qty'      => $request->alert_qty      ?? $product->alert_qty,
             'received_qty'   => $request->received_qty   ?? $product->received_qty,
             'remaining_qty'  => $request->remaining_qty  ?? $product->remaining_qty,
+            'hs_code'        => $request->filled('hs_code') ? trim($request->hs_code) : null,
+            'fbr_tax_rate'   => $request->filled('fbr_tax_rate') ? $request->fbr_tax_rate : null,
+            'fbr_uom'        => $request->filled('fbr_uom') ? trim($request->fbr_uom) : null,
+            'fbr_sale_type'  => $request->filled('fbr_sale_type') ? trim($request->fbr_sale_type) : null,
         ]);
 
         return redirect()->route('products.index')

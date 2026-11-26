@@ -455,6 +455,9 @@
     @endif
   </div>
 
+  @include('sales._fbr_block')
+  @include('sales._fbr_actions')
+
   <div class="footer">
     <div>{{ $s->thank_you_message ?? 'Thank you for your business.' }}</div>
     <div>Powered by Novastackhub</div>

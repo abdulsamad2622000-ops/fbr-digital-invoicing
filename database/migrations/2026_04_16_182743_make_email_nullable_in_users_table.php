@@ -1,17 +1,23 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    // Uses the schema builder (instead of a MySQL-only ALTER) so tests can run on SQLite.
     public function up()
     {
-        DB::statement('ALTER TABLE users MODIFY email VARCHAR(255) NULL');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('email')->nullable()->change();
+        });
     }
 
     public function down()
     {
-        DB::statement('ALTER TABLE users MODIFY email VARCHAR(255) NOT NULL');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('email')->nullable(false)->change();
+        });
     }
 };

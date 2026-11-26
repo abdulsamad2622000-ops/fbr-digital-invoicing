@@ -20,6 +20,10 @@ class Product extends Model
         'remaining_qty',
         'alert_qty',
         'is_active',
+        'hs_code',
+        'fbr_uom',
+        'fbr_sale_type',
+        'fbr_tax_rate',
     ];
 
     protected $casts = [

@@ -308,6 +308,12 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if(session('error'))
+                <div class="alert alert-danger py-2 px-3 mb-0">
+                    <i class="bi bi-exclamation-triangle me-1"></i>
+                    {{ session('error') }}
+                </div>
+            @endif
             <button onclick="window.print()" class="btn btn-sm btn-outline-secondary no-print" style="font-size:.8rem;border-radius:8px">
                 <i class="bi bi-printer"></i> Print
             </button>

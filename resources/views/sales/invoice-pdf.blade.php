@@ -428,6 +428,8 @@
     </div>
     @endif
 
+    @include('sales._fbr_block')
+
     <!-- Footer -->
     <table class="footer" cellpadding="0" cellspacing="0">
         <tr>

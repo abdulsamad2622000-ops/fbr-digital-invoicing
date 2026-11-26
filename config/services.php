@@ -42,7 +42,9 @@ return [
     'version'  => env('WHATSAPP_VERSION', 'v18.0'),
 ],
 
-
-
+    'fbr' => [
+        // Public IP of this server; shown in settings so the client can whitelist it in IRIS.
+        'server_ip' => env('FBR_SERVER_IP', '72.61.112.121'),
+    ],
 
 ];

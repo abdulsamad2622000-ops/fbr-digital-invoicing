@@ -47,6 +47,9 @@ class CustomerController extends Controller
             'cnic'            => $request->cnic,
             'opening_balance' => $request->opening_balance ?? 0,
             'balance'         => $request->opening_balance ?? 0,
+            'ntn'               => $request->ntn,
+            'province'          => $request->province,
+            'registration_type' => $request->registration_type === 'Registered' ? 'Registered' : 'Unregistered',
         ]);
 
         return redirect()->route('customers.index')
@@ -99,8 +102,16 @@ class CustomerController extends Controller
 
     public function update(Request $request, Customer $customer)
     {
-        $request->validate(['name' => 'required']);
-        $customer->update($request->all());
+        $request->validate([
+            'name'              => 'required',
+            'registration_type' => 'nullable|in:Registered,Unregistered',
+            'ntn'               => 'nullable|string|max:20',
+            'province'          => 'nullable|string|max:50',
+        ]);
+        $customer->update($request->only([
+            'name', 'contact1', 'contact2', 'address', 'cnic',
+            'ntn', 'province', 'registration_type',
+        ]));
 
         return redirect()->route('customers.index')
             ->with('success', 'Customer update ho gaya!');

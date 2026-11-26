@@ -9,6 +9,10 @@ return new class extends Migration
 {
     public function up()
     {
+        if (DB::getDriverName() !== 'mysql') {
+            return; // MySQL-only index check; nothing to drop on other drivers.
+        }
+
         $exists = DB::select("
             SHOW INDEX FROM products 
             WHERE Key_name = 'products_name_unique'

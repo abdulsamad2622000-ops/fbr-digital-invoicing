@@ -152,6 +152,20 @@ class SaleController extends Controller
             }
         });
 
+        // FBR Digital Invoicing: post automatically when the business has switched it on.
+        // A failure never blocks the sale; it is saved on the sale and shown on the invoice.
+        $fbrResult = null;
+        try {
+            $fbr = new \App\Services\FbrDigitalInvoiceService();
+            if ($fbr->isEnabled() && \App\Models\BusinessSetting::first()?->fbr_auto_post) {
+                $fbrResult = $fbr->post($sale->fresh(['items.product', 'customer']));
+                $sale->refresh();
+            }
+        } catch (\Throwable $e) {
+            Log::error('FBR auto-post failed: ' . $e->getMessage(), ['sale_id' => $sale->id]);
+            $fbrResult = ['ok' => false, 'message' => 'FBR post nahi hui: ' . $e->getMessage()];
+        }
+
         try {
             $whatsapp = new WhatsAppService();
             $sale->load(['customer', 'items.product', 'salesperson']);
@@ -165,6 +179,7 @@ class SaleController extends Controller
             'message' => 'Bill ban gaya! ✅',
             'sale_id' => $sale->id,
             'memo_no' => $sale->memo_no,
+            'fbr'     => $fbrResult ? ['ok' => $fbrResult['ok'], 'message' => $fbrResult['message'], 'invoiceNumber' => $fbrResult['invoiceNumber'] ?? null] : null,
         ]);
     }
 

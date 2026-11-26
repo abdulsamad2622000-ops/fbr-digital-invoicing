@@ -56,6 +56,12 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
 @endif
+@if(session('error'))
+<div class="alert alert-danger alert-dismissible fade show">
+    {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+@endif
 
 <div class="row justify-content-center">
     <div class="col-md-9">
@@ -318,8 +324,73 @@
                     </div>
                 </div>
 
+                <hr>
+
+                <!-- FBR Digital Invoicing -->
+                <div class="section-title">FBR Digital Invoicing</div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="form-check form-switch mt-2">
+                            <input type="hidden" name="fbr_enabled" value="0">
+                            <input class="form-check-input" type="checkbox" name="fbr_enabled" value="1" id="fbrEnabled"
+                                   @checked($setting?->fbr_enabled)>
+                            <label class="form-check-label" for="fbrEnabled">FBR invoicing on</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Environment</label>
+                        <select name="fbr_environment" class="form-select">
+                            <option value="sandbox" @selected(($setting?->fbr_environment ?? 'sandbox') === 'sandbox')>Sandbox (testing)</option>
+                            <option value="production" @selected($setting?->fbr_environment === 'production')>Production (live)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Seller Province *</label>
+                        <select name="seller_province" class="form-select">
+                            <option value="">— Select —</option>
+                            @foreach(\App\Services\FbrDigitalInvoiceService::PROVINCES as $province)
+                                <option value="{{ $province }}" @selected($setting?->seller_province === $province)>{{ $province }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">FBR Security Token</label>
+                        <input type="password" name="fbr_token" class="form-control" autocomplete="new-password"
+                               placeholder="{{ $setting?->fbr_token ? 'Token saved. Naya token sirf badalne ke liye daalein.' : 'IRIS se mila token yahan paste karein' }}">
+                        <small class="text-muted">Server IP jo IRIS mein whitelist karna hai: <code>{{ config('services.fbr.server_ip') }}</code></small>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Sandbox Scenario</label>
+                        <input type="text" name="fbr_scenario_id" class="form-control"
+                               value="{{ $setting?->fbr_scenario_id }}" placeholder="Auto (SN001 / SN002)">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check mt-2">
+                            <input type="hidden" name="fbr_prices_include_tax" value="0">
+                            <input class="form-check-input" type="checkbox" name="fbr_prices_include_tax" value="1" id="fbrInclTax"
+                                   @checked($setting?->fbr_prices_include_tax ?? true)>
+                            <label class="form-check-label" for="fbrInclTax">Sale prices mein sales tax shamil hai</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check mt-2">
+                            <input type="hidden" name="fbr_auto_post" value="0">
+                            <input class="form-check-input" type="checkbox" name="fbr_auto_post" value="1" id="fbrAuto"
+                                   @checked($setting?->fbr_auto_post)>
+                            <label class="form-check-label" for="fbrAuto">Har sale par invoice khud FBR ko bhejein</label>
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-check-lg me-1"></i> Save Settings
+                </button>
+            </form>
+
+            <form action="{{ route('settings.fbr.test') }}" method="POST" class="mt-3">
+                @csrf
+                <button type="submit" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-plug me-1"></i> FBR Connection Test
                 </button>
             </form>
         </div>

@@ -111,6 +111,30 @@
             </div>
         </div>
 
+        <h6 class="fw-bold mt-4 mb-2">FBR Digital Invoicing</h6>
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">HS Code</label>
+                <input type="text" name="hs_code" class="form-control"
+                       value="{{ $product->hs_code }}" placeholder="e.g. 8471.3020">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Sales Tax Rate (%)</label>
+                <input type="number" name="fbr_tax_rate" class="form-control"
+                       value="{{ $product->fbr_tax_rate ?? 18 }}" min="0" max="100" step="0.01">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Unit (UOM)</label>
+                <input type="text" name="fbr_uom" class="form-control"
+                       value="{{ $product->fbr_uom }}" placeholder="Numbers, pieces, units">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Sale Type</label>
+                <input type="text" name="fbr_sale_type" class="form-control"
+                       value="{{ $product->fbr_sale_type }}" placeholder="Goods at standard rate (default)">
+            </div>
+        </div>
+
         <div class="d-flex gap-2 mt-4">
             <button type="submit" class="btn btn-primary">
                 <i class="bi bi-check-lg me-1"></i> Update Product

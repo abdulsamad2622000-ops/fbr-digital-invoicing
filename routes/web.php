@@ -12,6 +12,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\BusinessSettingController;
+use App\Http\Controllers\FbrController;
 use App\Exports\ReportExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -91,6 +92,12 @@ Route::post('products/{product}/restore', [ProductController::class, 'restore'])
     Route::put('sales/{sale}/update', [SaleController::class, 'updateSale'])->name('sales.update');
     Route::post('sales/{sale}/transfer', [SaleController::class, 'transferSale'])->name('sales.transfer');
 
+    // ── FBR Digital Invoicing ──────────────────
+    Route::middleware('staff.permission:sale_access')->group(function () {
+        Route::post('sales/{sale}/fbr/validate', [FbrController::class, 'validateSale'])->name('sales.fbr.validate');
+        Route::post('sales/{sale}/fbr/post', [FbrController::class, 'postSale'])->name('sales.fbr.post');
+    });
+
     // ── Purchase Point ─────────────────────────
     Route::middleware('staff.permission:purchase_access')->group(function () {
         Route::get('purchases/pos', [SaleController::class, 'purchasePos'])->name('purchases.pos');
@@ -129,6 +136,7 @@ Route::post('products/{product}/restore', [ProductController::class, 'restore'])
     // ── Business Settings ──────────────────────
     Route::get('settings/business', [BusinessSettingController::class, 'edit'])->name('settings.business');
     Route::put('settings/business', [BusinessSettingController::class, 'update'])->name('settings.business.update');
+    Route::post('settings/fbr/test', [FbrController::class, 'testConnection'])->name('settings.fbr.test');
 
     // ── Admin Only ─────────────────────────────
     Route::middleware('admin')->group(function () {
