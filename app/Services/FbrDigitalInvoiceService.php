@@ -121,7 +121,7 @@ class FbrDigitalInvoiceService
                 'fixedNotifiedValueOrRetailPrice' => 0,
                 'salesTaxApplicable'              => $tax,
                 'salesTaxWithheldAtSource'        => 0,
-                'extraTax'                        => '',
+                'extraTax'                        => 0,
                 'furtherTax'                      => 0,
                 'sroScheduleNo'                   => '',
                 'fedPayable'                      => 0,
